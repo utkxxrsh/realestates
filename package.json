@@ -1,4 +1,5 @@
 {
+  "homepage":"http://utkxxrsh.github.io/realestates",
   "name": "real-estate-main",
   "version": "0.1.0",
   "private": true,
@@ -13,6 +14,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "predeploy":"npm run build",
+    "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -34,6 +37,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@headlessui/react": "^1.6.4",
+    "autoprefixer": "^10.4.7",
+    "gh-pages": "^5.0.0",
+    "postcss": "^8.4.14",
+    "react-icons": "^4.4.0",
+    "react-router-dom": "^6.8.1",
+    "tailwindcss": "^3.0.24"
+  }
+}
+
   },
   "devDependencies": {
     "@headlessui/react": "^1.6.4",
