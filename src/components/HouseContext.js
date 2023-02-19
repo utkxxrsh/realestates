@@ -9,6 +9,7 @@ const HouseContextProvider=({children}) => {
   const[property,setProperty]=useState('Property Type (any)');
   const[properties,setProperties]=useState([]);
   const[price,setPrice]=useState('Price range (any)');
+  const[room,setRoom]=useState('Bedrooms (any)');
   const[loading,setLoading]=useState([false]);
 
   useEffect(()=>{
@@ -40,40 +41,83 @@ setLoading(true);
   };
   const minPrice=parseInt(price.split( ' ')[0]);
   const maxPrice=parseInt(price.split( ' ')[2]);
+
+  const noRoom=parseInt(room);
  
   const newHouses=housesData.filter((house)=>{
     const housePrice=parseInt(house.price);
+    const houseRoom=parseInt(house.bedrooms);
 
     if(house.country==country && house.type==property && housePrice>=minPrice
-      && housePrice<=maxPrice){
+      && housePrice<=maxPrice && houseRoom==noRoom){
         return house;
       }
 
-      if(isDefault(country) && isDefault(property) &&isDefault(price)){
+      if(isDefault(country) && isDefault(property) &&isDefault(price) && isDefault(room)){
         return house;
       }
-      if(!isDefault(country) && isDefault(property) &&isDefault(price)){
+      if(!isDefault(country) && isDefault(property) &&isDefault(price) && isDefault(room)){
         return house.country===country;
       }
-      if(isDefault(country) && !isDefault(property)&&isDefault(price)){
+      if(isDefault(country) && !isDefault(property)&&isDefault(price) &&isDefault(room)){
         return house.type===property;
       }
-      if(isDefault(country) && isDefault(property)&& !isDefault(price)){
+      if(isDefault(country) && isDefault(property)&& !isDefault(price) && isDefault(room)){
         if(housePrice>=minPrice && housePrice<=maxPrice){
           return house;
         }
       }
-      if(!isDefault(country) && !isDefault(property)&&isDefault(price)){
+      if(isDefault(country) && isDefault(property)&&isDefault(price) && !isDefault(room)){
+        if(houseRoom==noRoom){
+          return house;
+        }
+      }
+      if(!isDefault(country) && !isDefault(property)&& isDefault(price) && isDefault(room)){
         return house.country===country && house.type===property;
       }
-      if(isDefault(country) && !isDefault(property)&& !isDefault(price)){
+      if(isDefault(country) && !isDefault(property)&& !isDefault(price) &&isDefault(room)){
         if(housePrice>=minPrice && housePrice<=maxPrice){
           return house.type===property;
         }
       }
-      if(!isDefault(country) && isDefault(property)&& !isDefault(price)){
+      if(!isDefault(country) && isDefault(property)&& !isDefault(price) && isDefault(room)){
         if(housePrice>=minPrice && housePrice<=maxPrice){
           return house.country===country;
+        }
+      }
+      if(!isDefault(country) && isDefault(property)&&  isDefault(price) && !isDefault(room)){
+        if(houseRoom==noRoom){
+          return house.country===country;
+        }
+      }
+      if(isDefault(country) && !isDefault(property)&& isDefault(price) && !isDefault(room)){
+        if(houseRoom==noRoom){
+          return house.type===property;
+        }
+      }
+      if(isDefault(country) && isDefault(property)&& !isDefault(price) && !isDefault(room)){
+        if(housePrice>=minPrice && housePrice<=maxPrice && houseRoom==noRoom){
+          return house;
+        }
+      }
+      if(!isDefault(country) && isDefault(property)&& !isDefault(price) && !isDefault(room)){
+        if(housePrice>=minPrice && housePrice<=maxPrice && houseRoom==noRoom){
+          return house.country===country;
+        }
+      }
+      if(isDefault(country) && !isDefault(property)&& !isDefault(price) && !isDefault(room)){
+        if(housePrice>=minPrice && housePrice<=maxPrice && houseRoom==noRoom){
+          return house.type===property;
+        }
+      }
+      if(!isDefault(country) && !isDefault(property)&& !isDefault(price) && isDefault(room)){
+        if(housePrice>=minPrice && housePrice<=maxPrice){
+          return house.country===country && house.type===property;
+        }
+      }
+      if(!isDefault(country) && !isDefault(property)&& isDefault(price) && !isDefault(room)){
+        if(houseRoom==noRoom){
+          return house.country===country && house.type===property;
         }
       }
       
@@ -98,6 +142,8 @@ setTimeout(()=>{
   properties,
   price,
   setPrice,
+  room,
+  setRoom,
   houses,
   loading,
   handleClick,
@@ -112,3 +158,4 @@ setTimeout(()=>{
 };
 
 export default HouseContextProvider;
+
